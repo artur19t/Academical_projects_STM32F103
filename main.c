@@ -1,5 +1,37 @@
 #include "stm32f10x.h"                  // Device header
 
+
+void GPIOB_LED_Init(void);
+void SetSysClockTo72(void);
+
+
+int main()
+{
+  SetSysClockTo72();
+  GPIOB_LED_Init();
+  while(1)
+  {
+    // --- Reset bit PB2 ---
+    GPIOB -> BSRR = GPIO_BSRR_BR2;
+    for (int i = 0; i < 100000; i++){
+    }
+    // --- Set bit PB2 ---
+    GPIOB -> BSRR = GPIO_BSRR_BS2;
+    for (int i = 0; i < 100000; i++){
+    }
+  }
+}
+
+void GPIOB_LED_Init(void)
+{
+  // --- Port B CLocking ---
+  RCC -> APB2ENR |= RCC_APB2ENR_IOPBEN;
+  // --- CLear Bits of pin 2 ---
+  GPIOB -> CRL &= ~(GPIO_CRL_CNF2 | GPIO_CRL_MODE2);
+  // --- Set conf MODE2 = 10, CNF2 = 00 ---
+  GPIOB -> CRL |= GPIO_CRL_MODE2_1;
+}
+
 void SetSysClockTo72(void)
 {
   // --- Enable HSE ---
