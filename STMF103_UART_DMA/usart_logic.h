@@ -3,6 +3,7 @@
 
 #include "main.h"
 extern uint8_t MainBuf[];
+extern uint8_t len;
 void collect_data(uint8_t *bufAddr, uint16_t dSize, bool);
 void prepare(uint8_t *bufAddr, uint16_t dSize, bool need_s);
 void process_command(void);

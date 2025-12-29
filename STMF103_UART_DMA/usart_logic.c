@@ -2,7 +2,7 @@
 
 enum comand {LED_ON, LED_OFF, RETRANSLATE};
 static char cmd_buf[RX_SIZE];
-uint8_t len = 0;
+
 
 typedef struct {
   const char *cmd;
